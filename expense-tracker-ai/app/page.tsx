@@ -10,6 +10,7 @@ import { Modal } from "@/components/ui/Modal";
 import { ExpenseForm } from "@/components/expenses/ExpenseForm";
 import { useExpenses } from "@/hooks/useExpenses";
 import { ExpenseFormData } from "@/lib/types";
+import { exportToCSV } from "@/lib/export";
 
 export default function DashboardPage() {
   const { expenses, isLoaded, addExpense } = useExpenses();
@@ -35,15 +36,26 @@ export default function DashboardPage() {
                 {new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" })}.
               </p>
             </div>
-            <button
-              onClick={() => setShowForm(true)}
-              className="flex items-center gap-2 bg-white/20 hover:bg-white/30 transition-colors px-4 py-2 rounded-xl text-sm font-semibold backdrop-blur-sm"
-            >
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-              </svg>
-              Add Expense
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => exportToCSV(expenses)}
+                className="flex items-center gap-2 bg-white/20 hover:bg-white/30 transition-colors px-4 py-2 rounded-xl text-sm font-semibold backdrop-blur-sm"
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                Export Data
+              </button>
+              <button
+                onClick={() => setShowForm(true)}
+                className="flex items-center gap-2 bg-white/20 hover:bg-white/30 transition-colors px-4 py-2 rounded-xl text-sm font-semibold backdrop-blur-sm"
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                </svg>
+                Add Expense
+              </button>
+            </div>
           </div>
         </div>
 
