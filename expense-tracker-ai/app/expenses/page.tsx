@@ -6,10 +6,10 @@ import { ExpenseFiltersBar } from "@/components/expenses/ExpenseFilters";
 import { ExpenseList } from "@/components/expenses/ExpenseList";
 import { Modal } from "@/components/ui/Modal";
 import { ExpenseForm } from "@/components/expenses/ExpenseForm";
+import { ExportModal } from "@/components/export/ExportModal";
 import { useExpenses } from "@/hooks/useExpenses";
 import { ExpenseFilters, ExpenseFormData } from "@/lib/types";
 import { filterExpenses, formatCurrency, getTotalAmount } from "@/lib/utils";
-import { exportToCSV } from "@/lib/export";
 import { useCurrency } from "@/context/CurrencyContext";
 
 const defaultFilters: ExpenseFilters = {
@@ -23,6 +23,7 @@ export default function ExpensesPage() {
   const { expenses, isLoaded, addExpense, updateExpense, deleteExpense } = useExpenses();
   const { currency } = useCurrency();
   const [showForm, setShowForm] = useState(false);
+  const [showExport, setShowExport] = useState(false);
   const [filters, setFilters] = useState<ExpenseFilters>(defaultFilters);
 
   const filtered = useMemo(
@@ -35,9 +36,7 @@ export default function ExpensesPage() {
     setShowForm(false);
   };
 
-  const handleExport = () => {
-    exportToCSV(filtered.length > 0 ? filtered : expenses);
-  };
+  const handleExport = () => setShowExport(true);
 
   const filteredTotal = getTotalAmount(filtered);
 
@@ -96,6 +95,12 @@ export default function ExpensesPage() {
           onCancel={() => setShowForm(false)}
         />
       </Modal>
+
+      <ExportModal
+        isOpen={showExport}
+        onClose={() => setShowExport(false)}
+        expenses={expenses}
+      />
     </>
   );
 }
