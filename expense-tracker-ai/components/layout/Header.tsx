@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 const navItems = [
   { label: "Dashboard", href: "/" },
   { label: "Expenses", href: "/expenses" },
+  { label: "Analytics", href: "/analytics" },
 ];
 
 interface HeaderProps {
