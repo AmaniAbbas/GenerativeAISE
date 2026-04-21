@@ -7,11 +7,12 @@ interface Props {
   filters: ExpenseFilters;
   onChange: (filters: ExpenseFilters) => void;
   onExport: () => void;
+  onExportPDF: () => void;
   totalShown: number;
   totalAll: number;
 }
 
-export function ExpenseFiltersBar({ filters, onChange, onExport, totalShown, totalAll }: Props) {
+export function ExpenseFiltersBar({ filters, onChange, onExport, onExportPDF, totalShown, totalAll }: Props) {
   const set = (key: keyof ExpenseFilters, value: string) =>
     onChange({ ...filters, [key]: value });
 
@@ -45,6 +46,15 @@ export function ExpenseFiltersBar({ filters, onChange, onExport, totalShown, tot
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
           </svg>
           <span className="hidden sm:inline">Export CSV</span>
+        </button>
+        <button
+          onClick={onExportPDF}
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-indigo-200 bg-indigo-50 text-indigo-700 text-sm font-medium hover:bg-indigo-100 transition-colors whitespace-nowrap"
+        >
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          <span className="hidden sm:inline">Export PDF</span>
         </button>
       </div>
 

@@ -9,7 +9,7 @@ import { ExpenseForm } from "@/components/expenses/ExpenseForm";
 import { useExpenses } from "@/hooks/useExpenses";
 import { ExpenseFilters, ExpenseFormData } from "@/lib/types";
 import { filterExpenses, formatCurrency, getTotalAmount } from "@/lib/utils";
-import { exportToCSV } from "@/lib/export";
+import { exportToCSV, exportToPDF } from "@/lib/export";
 import { useCurrency } from "@/context/CurrencyContext";
 
 const defaultFilters: ExpenseFilters = {
@@ -37,6 +37,10 @@ export default function ExpensesPage() {
 
   const handleExport = () => {
     exportToCSV(filtered.length > 0 ? filtered : expenses);
+  };
+
+  const handleExportPDF = () => {
+    exportToPDF(filtered.length > 0 ? filtered : expenses, currency);
   };
 
   const filteredTotal = getTotalAmount(filtered);
@@ -77,6 +81,7 @@ export default function ExpensesPage() {
           filters={filters}
           onChange={setFilters}
           onExport={handleExport}
+          onExportPDF={handleExportPDF}
           totalShown={filtered.length}
           totalAll={expenses.length}
         />
