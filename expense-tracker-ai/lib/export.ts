@@ -177,11 +177,12 @@ export function exportToPDF(expenses: Expense[], currency: Currency = "USD"): vo
 }
 
 export function exportToCSV(expenses: Expense[]): void {
+  const esc = (v: string) => `"${v.replace(/"/g, '""')}"`;
   const headers = ["Date", "Category", "Description", "Amount"];
   const rows = expenses.map((e) => [
-    formatDate(e.date),
-    e.category,
-    `"${e.description.replace(/"/g, '""')}"`,
+    esc(formatDate(e.date)),
+    esc(e.category),
+    esc(e.description),
     e.amount.toFixed(2),
   ]);
 

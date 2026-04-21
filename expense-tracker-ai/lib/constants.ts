@@ -62,3 +62,9 @@ export const MONTH_NAMES = [
   "Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
 ];
+
+export const NAV_ROUTES = [
+  { label: "Dashboard", href: "/" },
+  { label: "Expenses", href: "/expenses" },
+  { label: "Analytics", href: "/analytics" },
+];

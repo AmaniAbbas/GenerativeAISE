@@ -3,12 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-const navItems = [
-  { label: "Dashboard", href: "/" },
-  { label: "Expenses", href: "/expenses" },
-  { label: "Analytics", href: "/analytics" },
-];
+import { NAV_ROUTES } from "@/lib/constants";
 
 interface HeaderProps {
   onAddExpense?: () => void;
@@ -18,7 +13,7 @@ export function Header({ onAddExpense }: HeaderProps) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const pageTitle = navItems.find((n) => n.href === pathname)?.label ?? "SpendSmart";
+  const pageTitle = NAV_ROUTES.find((n) => n.href === pathname)?.label ?? "SpendSmart";
 
   return (
     <header className="bg-white border-b border-slate-100 sticky top-0 z-40">
@@ -73,7 +68,7 @@ export function Header({ onAddExpense }: HeaderProps) {
       {/* Mobile nav */}
       {mobileOpen && (
         <nav className="md:hidden bg-white border-t border-slate-100 px-4 py-3 space-y-1">
-          {navItems.map((item) => (
+          {NAV_ROUTES.map((item) => (
             <Link
               key={item.href}
               href={item.href}

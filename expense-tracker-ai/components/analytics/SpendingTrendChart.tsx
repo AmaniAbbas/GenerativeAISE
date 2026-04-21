@@ -28,13 +28,15 @@ function get12MonthData(expenses: Expense[]) {
   });
 
   const now = new Date();
+  const currentYear = now.getFullYear();
   return Array.from({ length: 12 }, (_, i) => {
     const d = new Date(now.getFullYear(), now.getMonth() - 11 + i, 1);
     const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
-    return {
-      month: MONTH_NAMES[d.getMonth()],
-      total: map.get(key) || 0,
-    };
+    const monthLabel =
+      d.getFullYear() !== currentYear
+        ? `${MONTH_NAMES[d.getMonth()]} '${String(d.getFullYear()).slice(2)}`
+        : MONTH_NAMES[d.getMonth()];
+    return { month: monthLabel, total: map.get(key) || 0 };
   });
 }
 
