@@ -67,4 +67,5 @@ export const NAV_ROUTES = [
   { label: "Dashboard", href: "/" },
   { label: "Expenses", href: "/expenses" },
   { label: "Analytics", href: "/analytics" },
+  { label: "Monthly Insights", href: "/monthly-insights" },
 ];
